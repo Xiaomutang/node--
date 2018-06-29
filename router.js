@@ -19,7 +19,7 @@ router
     .post('/signin', user.handleSignin)
     .get('/signup', user.showSignup)
     .post('/signup', user.handleSignup)
-    .post('/signout', user.handleSignout);
+    .get('/signout', user.handleSignout);
 
 // 话题路由
 router
@@ -28,7 +28,7 @@ router
     .get('/topic/:topicID', topic.showTopicID)
     .get('/topic/:topicID/edit', topic.showEdit)
     .post('/topic/:topicID/edit', topic.handleTopicID)
-    .post('/topic/:topicID/delete', topic.hanleDelete);
+    .get('/topic/:topicID/delete', topic.hanleDelete);
 
 // 4 导出router
 module.exports = router;

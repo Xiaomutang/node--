@@ -109,5 +109,16 @@ exports.handleTopicID = (req, res) => {
 }
 
 exports.hanleDelete = (req, res) => {
-    res.send("hanleDelete")
+    const id = req.params.topicID;
+    console.log(id);
+    topicModel.delete(id, (err, isOK) => {
+        if (err) {
+            return res.send('服务器内部错误');
+        }
+        if (isOK) {
+            res.redirect('/');
+        } else {
+            res.send('删除失败');
+        }
+    })
 }

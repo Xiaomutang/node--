@@ -35,7 +35,7 @@ exports.getById = (id, callback) => {
 
 exports.delete = (id, callback) => {
     db.query(
-        'delete from `topic` where `id`=?',
+        'delete from `topics` where `id`=?',
         id,
         (err, results) => {
             if (err) {

@@ -62,11 +62,50 @@ exports.showTopicID = (req, res) => {
 }
 
 exports.showEdit = (req, res) => {
-    res.send("showEdit")
+    categoryModel.getAll((err, categories) => {
+        const id = req.params.topicID;
+        if (isNaN(id)) {
+            return res.send('参数错误');
+        }
+        topicModel.getById(id, (err, topic) => {
+            if (err) {
+                return res.send('服务器内部错误');
+            }
+            if (topic) {
+                res.render('topic/edit.html', {
+                    categories,
+                    topic,
+                    user: req.session.user
+                })
+            } else {
+                res.send('没有查询到数据');
+            }
+        })
+    })
 }
 
 exports.handleTopicID = (req, res) => {
-    res.send("handleTopicID")
+    const id = req.params.topicID;
+    req.body.id = id;
+    topicModel.update(req.body, (err, isOK) => {
+        if (err) {
+            return res.json({
+                code: 500,
+                msg: '服务器内部错误'
+            });
+        }
+        if (isOK) {
+            return res.json({
+                code: 200,
+                msg: '修改成功'
+            });
+        } else {
+            return res.json({
+                code: 403,
+                msg: '修改失败'
+            });
+        }
+    })
 }
 
 exports.hanleDelete = (req, res) => {

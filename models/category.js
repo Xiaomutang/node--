@@ -1,3 +1,5 @@
+const db = require('./db_helper');
+
 exports.getAll = (callback) => {
     db.query(
       'select * from `topic_categories`',

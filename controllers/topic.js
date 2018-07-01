@@ -42,7 +42,23 @@ exports.handleTopic = (req, res) => {
 }
 
 exports.showTopicID = (req, res) => {
-    res.send("showTopicID")
+    const topicID = req.params.topicID;
+    if (isNaN(topicID)) {
+        return res.send('参数错误');
+    }
+    topicModel.getById(topicID, (err, topic) => {
+        if (err) {
+            return res.send('服务器内部错误');
+        }
+        if (topic) {
+            res.render('topic/show.html', {
+              topic,
+              user: req.session.user
+            });
+        } else {
+            res.send('您查询的话题不存在');
+        }
+    })
 }
 
 exports.showEdit = (req, res) => {

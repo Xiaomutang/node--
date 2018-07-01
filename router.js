@@ -25,6 +25,7 @@ router
 router
     .get('/topic/create', topic.showTopic)
     .post('/topic/create', topic.handleTopic)
+    
     .get('/topic/:topicID', topic.showTopicID)
     .get('/topic/:topicID/edit', topic.showEdit)
     .post('/topic/:topicID/edit', topic.handleTopicID)
